@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-gpu
+  labels:
+    creation_method: manual
+    env: prod
+spec:
+  nodeSelector:     # NodeSelector tells Kubernetes to deploy this pd only to nodes containing the gpu=true label
+    gpu: "true"
+  containers:
+    - image: luksa/kubia
+      name: kubia
+      ports:
+        - containerPort: 8080
+          protocol: TCP
